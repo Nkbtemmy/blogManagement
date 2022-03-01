@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import Albums from "./pages/Albums";
+import Posts from "./pages/Posts";
+import User from "./pages/User";
+import Users from "./pages/Users";
 
-function App() {
+import * as actionTypes from "./store/actions";
+
+export default function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actionTypes.getUsers());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Switch>
+        <Route path="/" exact component={Users} />
+        <Route path="/users/:userId" exact component={User} />
+        <Route path="/users/:userId/posts" exact component={Posts} />
+        <Route path="/users/:userId/albums" exact component={Albums} />
+      </Switch>
     </div>
   );
 }
-
-export default App;
