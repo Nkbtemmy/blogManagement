@@ -99,6 +99,12 @@ const User = () => {
             >
               Albums
             </Link>
+            <Link
+              className="underline text-blue-500 hover:text-blue-800"
+              to={`/users/${userId}/post`}
+            >
+              CREATE POST
+            </Link>
           </div>
         </>
       )}
